@@ -78,7 +78,11 @@ public class CS246Similarity extends Similarity {
    * @return computed similarity score between the current term and the document.
    */
   protected float score(BasicStats stats, float tf, float docLen, long docValue)
-  {
+  { 
+    
+    //return (float)log2(docValue + 1) * tf * idf(stats) / docLen;
+    // return (float)Math.log(docValueBoost(docValue) + 1.0f) / (float)Math.log(2) * tf * idf(stats) / docLen;
+    return (float)(log2(docValueBoost(docValue) + 1.0f)) * tf * idf(stats) / docLen;
     // The first parameter stats has the following collection-level statistics:
     //    stats.numberOfDocuments: the total # of documents in the collection
     //    stats.numberofFieldTokens: the total # of tokens extracted from the field
@@ -93,17 +97,19 @@ public class CS246Similarity extends Similarity {
     //    Note: If we want to use a value from a field other than "clicks", we need to change 
     //    the CS246Similarity constructor by setting "signalField" to the name of the desired field.
 
-    return tf*idf(stats)*docValueBoost(docValue)/docLen;
+    //return tf*idf(stats)*docValueBoost(docValue)/docLen;
   }
   
   protected float idf(BasicStats stats)
   {
-    return 1f;
+    // return (float)Math.log(((float)stats.numberOfDocuments + 1.0f)/((float)stats.docFreq + 1.0f)) / (float)Math.log(2);
+    return (float) (log2((stats.numberOfDocuments + 1.0f)/(stats.docFreq + 1.0f)));
+    //return (float)log2((stats.numberOfDocuments + 1)/(stats.docFreq + 1));
   }
 
   protected float docValueBoost(long docValue)
   {
-    return 1f;
+    return (float)docValue;
   }
 
   /**

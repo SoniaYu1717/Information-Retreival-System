@@ -6,10 +6,13 @@ curl -XGET 'localhost:9200/task1a/_search?pretty' -H 'Content-Type: application/
 {
   "query": {
     "bool": {
-      "should": [
+      "must": [
         { 
             "match": { 
-                "title": "'$QUERY'"
+                "title": {
+                  "query": "'$QUERY'",
+                   "boost": 10
+                }
             }
         },
         {
@@ -17,7 +20,12 @@ curl -XGET 'localhost:9200/task1a/_search?pretty' -H 'Content-Type: application/
                 "abstract": "'$QUERY'"
             }
         }
-      ]
+      ],
+      "must_not": {
+        "match": {
+          "sections": "'$QUERY'"
+        }
+      }
     }
   }
 }

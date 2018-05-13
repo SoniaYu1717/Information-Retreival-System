@@ -1,0 +1,21 @@
+0: research equipment
+1: education program
+2: network system
+3: chemistry
+4: collabration research
+5: environment
+6: socail study
+7: material
+8: industrial development
+9: species
+10: modeling
+11: behavior study
+12: fluid
+13: geochemistry
+14: research process
+15: resource
+16: nuclear power
+17: cellular biology
+18: science workshop
+19: geometry
+ 
